@@ -140,7 +140,7 @@ void setup(void) {
     return;
   }
 
-  rc = db_exec(db, "CREATE TABLE tblLog (LogID INTEGER, Pressure INTEGER, Date TEXT, User TEXT);");
+  rc = db_exec(db, "CREATE TABLE tblLog (LogID INTEGER, Pressure INTEGER, User TEXT);");
   if (rc != SQLITE_OK) {
     Serial.println("ERROR: CREATE TABLE query failed.");
     sqlite3_close(db);
@@ -178,7 +178,7 @@ void afterRead() {
 
 int idCounter = 1;
 void storePressure(String pressureString) {
-  String sql = "INSERT INTO tblLog VALUES (" + String(idCounter) + "," + pressureString + ", datetime(unixepoch(), 'unixepoch', 'localtime'), 'Devam');";
+  String sql = "INSERT INTO tblLog VALUES (" + String(idCounter) + "," + pressureString + ", 'Devam');";
 
   rc = db_exec(db, sql.c_str()); // execute sql query
   if (rc != SQLITE_OK) {
